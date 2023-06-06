@@ -12,18 +12,27 @@ News
 {% endblock title %}
 
 {% block content %}
-
-   <h1>Новости</h1>
+<hr>
+   <form action="" method="get">
+   {{ filterset.form.as_table }}
+   <input type="submit" value="Найти" />
+    </form>
+<hr>
 
    <h3>{% current_time '%b %d %Y' %}</h3>
-   <h3> {{ new_news|default_if_none:"Горячие новости!" }} </h3>
     <br>
     <br>
     {% if post %}
            {% for post in post %}
-               <h4> {{ post.title }} </h4>
-               <h6>{{ post.time_in|date:"d.m.Y" }}</h6>
-               <hr><a href="{{ post.id }}">{{ post.text|truncatechars:20 }}</a><hr>
+                {% if post.category == 'NW' %}
+                    <h4> {{ post.title }} </h4>
+                    <h6>{{ post.time_in|date:"d.m.Y" }}</h6>
+                    <hr><a href="{% url 'news_list' %}{{ post.id }}">{{ post.text|truncatechars:20 }}</a><hr>
+                {% else %}
+                    <h4> {{ post.title }} </h4>
+                    <h6>{{ post.time_in|date:"d.m.Y" }}</h6>
+                    <hr><a href="{% url 'ar_list' %}{{ post.id }}">{{ post.text|truncatechars:20 }}</a><hr>
+                {% endif %}
            {% endfor %}
 
     {% else %}

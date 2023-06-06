@@ -11,4 +11,6 @@
 <h1>{{ post.title }}</h1>
 {{ post.time_in|date:"d.m.Y" }}
 <hr>{{ post.text|censor }}<hr>
+<a href="{{ post.id }}/delete/">Delete</a><hr>
+<a href="{{ post.id }}/edit/">Edit</a><hr>
 {% endblock content %}
